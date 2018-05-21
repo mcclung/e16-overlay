@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+
+<repositories version="1.0">
+	<repo priority="50" quality="experimental" status="unofficial">
+		<name><![CDATA[e16-overlay]]></name>
+		<description>Enlightenment DR16 Overlay</description>
+		<homepage>https://github.com/mcclung/e16-overlay</homepage>
+		<owner>
+			<email>scott@mcclung.com</email>
+		</owner>
+		<source type="git">https://github.com/mcclung/e16-overlay.git</source>
+	</repo>
+</repositories>
