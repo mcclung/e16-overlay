@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer type="person">
+    <email>scott@mcclung.com</email>
+	<name>Scott McClung</name>
+  </maintainer>
+  <use>
+    <flag name="pango">Enable pango font rendering</flag>
+    <flag name="xrandr">Enable support for the X xrandr extension</flag>
+  </use>
+  <longdescription>
+    Enlightenment (e16) is a classic X11 window manager.
+  </longdescription>
+</pkgmetadata>
