@@ -44,11 +44,7 @@ RDEPEND="pulseaudio? ( media-sound/pulseaudio )
 	virtual/libiconv"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
-	x11-proto/xextproto
-	x11-proto/xf86vidmodeproto
-	xinerama? ( x11-proto/xineramaproto )
-	xcomposite? ( x11-proto/compositeproto )
-	x11-proto/xproto
+	x11-base/xorg-proto
 	nls? ( sys-devel/gettext )"
 PDEPEND="doc? ( app-doc/edox-data )"
 
