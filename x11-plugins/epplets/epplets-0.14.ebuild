@@ -19,8 +19,7 @@ RDEPEND="x11-libs/libX11
 	>=x11-wm/e16-1.0.18"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
-	x11-proto/xproto
-	x11-proto/xextproto"
+	x11-base/xorg-proto"
 
 src_configure() {
 	econf $(use_enable static-libs static)
