@@ -23,6 +23,8 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	x11-base/xorg-proto"
 
+S=${WORKDIR}/${MY_P}
+
 src_configure() {
 	econf $(use_enable static-libs static)
 }
