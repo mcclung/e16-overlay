@@ -1,8 +1,8 @@
 # e16-overlay
 Enlightenment DR16 Gentoo Overlay
 
-NOTE: These ebuilds have been added back to the gentoo tree.  They have a newer EAPI there and more features and USE flags.
-I'm going to have to recommend that everydone delete this overlay and use those.  
+NOTE: Newer and better version of these ebuilds have been added back to the gentoo tree. They have a newer EAPI
+there and more features and USE flags. I'm going to have to recommend that everydone delete this overlay and use those.  
 
 At some point I will archive this overlay, but not yet.
 
