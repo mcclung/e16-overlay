@@ -81,8 +81,6 @@ DEPEND="${COMMON_DEPEND}
 	x11-base/xorg-proto
 "
 
-PATCHES=( "${FILESDIR}/${PN}-user-fonts.patch" )
-
 src_configure() {
 	local myconf=(
 		$(use_enable container)
