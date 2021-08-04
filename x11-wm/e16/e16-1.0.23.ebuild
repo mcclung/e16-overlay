@@ -5,7 +5,7 @@ EAPI=8
 
 DESCRIPTION="Enlightenment Window Manager (E16)"
 HOMEPAGE="https://www.enlightenment.org https://sourceforge.net/projects/enlightenment/"
-SRC_URI="mirror://sourceforge/enlightenment/${P}.tar.xz"
+SRC_URI="mirror://sourceforge/enlightenment/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
