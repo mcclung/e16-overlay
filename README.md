@@ -1,10 +1,10 @@
 # e16-overlay
 Enlightenment DR16 Gentoo Overlay
 
-If using layman, you can use the following to install the overlay:
+To add the repository to your system:
 
-layman -o https://raw.githubusercontent.com/mcclung/e16-overlay/master/repositories.xml -f -a e16-overlay
+eselect repository add e16-overlay git https://github.com/mcclung/e16-overlay.git
 
-If you are using "eselect repository":
+To remove it:
 
-eselect repository add e16-overlay git https://raw.githubusercontent.com/mcclung/e16-overlay/master/repositories.xml
+eselect repository remove -f e16-overlay
