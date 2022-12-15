@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -10,10 +10,10 @@ SRC_URI="mirror://sourceforge/enlightenment/${P}.tar.xz"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="+alsa audiofile container dbus debug +dialogs doc examples
-gnome libhack modules nls opengl +pango +poll player pulseaudio
-select +sndfile sound +themes xcomposite +xft xi2 xinerama xpresent
-+xrandr +xrender +xsm +xsync zoom"
+IUSE="+alsa audiofile dbus debug +dialogs doc examples gnome
+libhack modules nls no-container opengl +pango +poll player
+pulseaudio select +sndfile sound +themes xcomposite +xft xi2
+xinerama xpresent +xrandr +xrender +xsm +xsync zoom"
 
 REQUIRED_USE="
 	^^ ( poll select )
@@ -84,7 +84,6 @@ DEPEND="${COMMON_DEPEND}
 
 src_configure() {
 	local myconf=(
-		$(use_enable container)
 		$(use_enable dbus)
 		$(use_enable debug libtrip)
 		$(use_enable dialogs)
@@ -92,6 +91,7 @@ src_configure() {
 		$(use_enable libhack)
 		$(use_enable modules)
 		$(use_enable nls)
+		$(use_enable no-container)
 		$(use_enable opengl glx)
 		$(use_enable pango)
 		$(use_enable xcomposite composite)
@@ -109,7 +109,6 @@ src_configure() {
 		--disable-docs
 		--disable-esdtest
 		--disable-gcc-cpp
-		--disable-hints-gnome
 		--disable-werror
 		--disable-xscrnsaver
 	)
