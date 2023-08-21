@@ -9,7 +9,7 @@ SRC_URI="mirror://sourceforge/e16-theme-pack/e16.theme.pack-${PV}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="~amd64 ~x86"
 
 RDEPEND="
 	!x11-themes/etheme-BlueSteel
