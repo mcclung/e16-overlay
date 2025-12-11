@@ -1,7 +1,9 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
+
+inherit autotools
 
 DESCRIPTION="Enlightenment Window Manager (E16)"
 HOMEPAGE="https://www.enlightenment.org https://sourceforge.net/projects/enlightenment/"
@@ -9,15 +11,15 @@ SRC_URI="https://downloads.sourceforge.net/enlightenment/${P}.tar.xz"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
-IUSE="+alsa audiofile dbus debug +dialogs doc examples gnome
-libhack modules nls no-container opengl +pango +poll player
-pulseaudio select +sndfile sound +themes xcomposite +xft xi2
-xinerama xpresent +xrandr +xrender +xsm +xsync zoom"
+KEYWORDS="amd64 x86"
+IUSE="+alsa audiofile +dbus debug +dialogs doc examples gnome
+libhack editline modules nls no-container opengl +pango player
+pulseaudio readline +sndfile sound +themes xcomposite +xft
+xi2 xinerama xpresent +xrandr +xrender +xsm +xsync zoom"
 
 REQUIRED_USE="
-	^^ ( poll select )
-	opengl? ( xcomposite )
+	?? ( editline readline )
+	opengl? ( xcomposite xrender )
 	pango? ( xft )
 	sound? (
 		^^ ( alsa player pulseaudio )
@@ -31,21 +33,22 @@ BDEPEND="
 	virtual/pkgconfig
 "
 COMMON_DEPEND="
-	media-libs/freetype:2
-	media-libs/imlib2[X]
+	media-libs/imlib2[X,text]
 	virtual/libiconv
 	x11-libs/libX11
 	x11-libs/libXext
 	x11-misc/xbitmaps
 	dbus? ( sys-apps/dbus )
+	editline? ( dev-libs/editline:= )
 	opengl? (
 		media-libs/glu
-		media-libs/mesa
+		media-libs/libglvnd[X]
 	)
 	pango? (
 		dev-libs/glib:2
 		x11-libs/pango[X]
 	)
+	readline? ( sys-libs/readline:= )
 	sound? (
 		alsa? ( media-libs/alsa-lib )
 		player? ( media-sound/alsa-utils )
@@ -62,6 +65,7 @@ COMMON_DEPEND="
 		x11-libs/libXfixes
 	)
 	xft? ( x11-libs/libXft )
+	xi2? ( x11-libs/libXi )
 	xinerama? ( x11-libs/libXinerama )
 	xpresent? ( x11-libs/libXpresent )
 	xrandr? ( x11-libs/libXrandr )
@@ -70,7 +74,7 @@ COMMON_DEPEND="
 		x11-libs/libICE
 		x11-libs/libSM
 	)
-	zoom? ( x11-libs/libXxf86vm )
+	zoom? ( !xrandr? ( x11-libs/libXxf86vm ) )
 "
 RDEPEND="${COMMON_DEPEND}
 	doc? ( app-doc/e16-docs )
@@ -80,7 +84,22 @@ RDEPEND="${COMMON_DEPEND}
 "
 DEPEND="${COMMON_DEPEND}
 	x11-base/xorg-proto
+	pango? (
+		media-libs/fontconfig
+		media-libs/freetype:2
+		media-libs/harfbuzz:=
+	)
 "
+
+PATCHES=(
+	"${FILESDIR}"/${PN}-1.0.31-fix-docdir.patch
+)
+
+src_prepare() {
+	default
+
+	eautoreconf
+}
 
 src_configure() {
 	local myconf=(
@@ -105,8 +124,9 @@ src_configure() {
 		$(use_enable xsync)
 		$(use_enable zoom)
 		$(use_with gnome gnome gnome3)
+		$(usev editline --with-lineedit=yes)
+		$(usev readline --with-lineedit=readline)
 		--enable-mans
-		--disable-docs
 		--disable-esdtest
 		--disable-gcc-cpp
 		--disable-werror
@@ -126,8 +146,6 @@ src_configure() {
 	else
 		myconf+=( --disable-sound --without-sndldr )
 	fi
-	use poll && myconf+=( --with-evhan=poll )
-	use select && myconf+=( --with-evhan=select )
 
 	econf "${myconf[@]}"
 }
